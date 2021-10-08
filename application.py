@@ -12,21 +12,21 @@ auth = tweepy.OAuthHandler("L257qgdPIAy49BicnSfTTXdZ0", "KtiGNxeKgVNeOxsDbW9sU9Q
 
 
 #
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def index():
 
     return render_template('index.html')
 
 
-@app.route('/', methods=['POST'])
+@application.route('/', methods=['POST'])
 def login():
     global auth
     redirect_user = auth.get_authorization_url()
     webbrowser.open(redirect_user)
     return render_template('tweets.html')
-@app.route("/pin",methods=['POST'])
+@application.route("/pin",methods=['POST'])
 def data():
     pin = request.form['pin']
     global auth
@@ -58,4 +58,4 @@ def data():
     return render_template('timeline.html',data=data1)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port='5001')
+    application.run(host='0.0.0.0',port='5001')
