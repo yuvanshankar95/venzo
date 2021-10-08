@@ -35,4 +35,12 @@ class Fetch:
     def get_data(self):
         global db
         data = db.child(self.token).get()
-        return data
+        return data.val()
+class Remove:
+    def __init__(self,token):
+        self.token = token
+    
+    def del_data(self):
+        global db
+        db.child(self.token).remove()
+        return

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from backend import Login
 import webbrowser
 import tweepy
-from pyre import Add,Fetch
+from pyre import Add,Fetch,Remove
 
 
 
@@ -38,6 +38,7 @@ def data():
     public_tweets = api.home_timeline()
 
     token = auth.access_token
+    Remove(token).del_data()
     for tweet in public_tweets:
         id = tweet.id
         add = Add(token,tweet.user.name,tweet.text,str(tweet.created_at))
@@ -49,10 +50,12 @@ def data():
     
         fetch_data = Fetch(token)
         data = fetch_data.get_data()
-        print(data)
+        data1=[]
+        for key,val in data.items():
+            data1.append(val)
 
 
-    return render_template('timeline.html',data=data)
+    return render_template('timeline.html',data=data1)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port='5001')
