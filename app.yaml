@@ -1,5 +1,4 @@
 runtime: python
-handlers:- url: /static  static_dir: static- url: /.*  script: main.app  libraries:  - name: ssl    version: latest
 env: flex
 entrypoint: gunicorn -b :$PORT main:app
 
